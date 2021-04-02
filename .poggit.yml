@@ -4,6 +4,6 @@ branches:
 - master
 projects:
   mywarp-en:
-    path: mywarp-en/
+    path: ./
     icon: 744A0886-447F-4D37-9A7F-4CFA8ACE3736.png
 ...
