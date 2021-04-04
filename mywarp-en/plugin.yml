@@ -2,7 +2,7 @@ name: MyWarp
 version: 1.0.0
 author: lovetwice1012
 api: 3.0.0
-main: MyWarp\MyWarp
+main: Movetwice1012\yWarp\MyWarp
 description: Players can save their own warp points
 commands:
     mywarp:
