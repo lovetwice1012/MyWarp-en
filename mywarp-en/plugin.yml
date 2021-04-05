@@ -11,3 +11,16 @@ commands:
     myw:
         description: Manage your own warp points.
         usage: /myw
+ 
+permissions:
+   mywarp.*:
+     description: Players can manage their own warp points
+     children:
+       mywarp.mywarp: true
+       mywarp.myw: true
+   mywarp.mywarp:
+     description: Players can manage their own warp points
+     default: true
+   mywarp.myw:
+     description: Players can manage their own warp points
+     default: true
