@@ -13,14 +13,14 @@ commands:
         usage: /myw
  
 permissions:
-   mywarp.*:
+   lovetwice1012.mywarp.*:
      description: Players can manage their own warp points
      children:
-       mywarp.mywarp: true
-       mywarp.myw: true
-   mywarp.mywarp:
+       lovetwice1012.mywarp.mywarp: true
+       lovetwice1012.mywarp.myw: true
+   lovetwice1012.mywarp.mywarp:
      description: Players can manage their own warp points
      default: true
-   mywarp.myw:
+   lovetwice1012.mywarp.myw:
      description: Players can manage their own warp points
      default: true
