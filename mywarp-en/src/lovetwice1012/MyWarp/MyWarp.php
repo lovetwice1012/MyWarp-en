@@ -27,6 +27,9 @@ class MyWarp extends PluginBase implements Listener
     public $addmenudescription;
     public $addtextinputbox;
     public $deletemenudescription;
+    public $addwarppointsuccessresponse;
+    public $deletewarppointsuccessresponse;
+    public $teleportsuccessresponse;
     public function onEnable()
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -40,10 +43,24 @@ class MyWarp extends PluginBase implements Listener
             $this->language->set("addmenudescription","Please fill in the items");
             $this->language->set("addtextinputbox","Enter the warp point name");
             $this->language->set("deletemenudescription","Select the location name you want to delete");
+            $this->language->set("addwarppointsuccessresponse","Added!");
+            $this->language->set("deletewarppointsuccessresponse","Deleted!");
+            $this->language->set("teleportsuccessresponse","Warped!!");
             $this->language->set("configsetupfinish",true);
             $this->language->save();
         }
-        
+            $this->menudescription = $this->language->get("menudescription");
+            $this->menuwarpbutton = $this->language->get("menuwarpbutton");
+            $this->menuaddbutton = $this->language->get("menuaddbutton");
+            $this->menudeletebutton = $this->language->get("menudeletebutton");
+            $this->warpmenudescription = $this->language->get("warpmenudescription");
+            $this->addmenudescription = $this->language->get("addmenudescription");
+            $this->addtextinputbox = $this->language->get("addtextinputbox");
+            $this->deletemenudescription = $this->language->get("deletemenudescription");
+            $this->addwarppointsuccessresponse = $this->language->get("addwarppointsuccessresponse");
+            $this->deletewarppointsuccessresponse = $this->language->get("deletewarppointsuccessresponse");
+            $this->teleportsuccessresponse = $this->language->get("teleportsuccessresponse");
+            
     }
 
   public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
@@ -65,10 +82,10 @@ class MyWarp extends PluginBase implements Listener
     public function sendmanageform($sender){
                     if ($sender instanceof Player) {
                     $player = $sender->getPlayer();
-                    $window = new SimpleWindowForm("mywarp menu", "§5Mywarp menu", "Please select the desired operation");
-                    $window->addButton("warp", "Warp to the warp point");
-                    $window->addButton("add", "Add a warp point");
-                    $window->addButton("delete", "Delete the warp point");            
+                    $window = new SimpleWindowForm("mywarp menu", "§5Mywarp menu", $this->menudescription);
+                    $window->addButton("warp", $this->menuwarpbutton);
+                    $window->addButton("add", $this->menuaddbutton);
+                    $window->addButton("delete", $this->menudeletebutton);            
                     $window->showTo($player);
                     }
     }
@@ -85,7 +102,7 @@ class MyWarp extends PluginBase implements Listener
                 case "Warp to the warp point":
                 if($player->hasPermission("lovetwice1012.mywarp.warp")){
                 $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
-                $window = new SimpleWindowForm("mywarp warp", "§5Mywarp menu", "Please select the point to warp");
+                $window = new SimpleWindowForm("mywarp warp", "§5Mywarp menu", $this->warpmenudescription);
                 $datas = $mywarpconfig->getAll(true);
                 foreach($datas as $data){
                     if($data !== null || $data !== undefined){
@@ -97,15 +114,15 @@ class MyWarp extends PluginBase implements Listener
                 break;
                 case "Add a warp point":
                 if($player->hasPermission("lovetwice1012.mywarp.add")){
-                $window = new CustomWindowForm("mywarp add", "§5Mywarp menu", "Please fill in the items");
-                $window->addInput("warpname", "Enter the warp point name");
+                $window = new CustomWindowForm("mywarp add", "§5Mywarp menu", $this->addmenudescription);
+                $window->addInput("warpname", $this->addtextinputbox);
                 $window->showTo($player);
                 }
                 break;
                 case "Delete the warp point":
                 if($player->hasPermission("lovetwice1012.mywarp.delete")){
                 $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
-                $window = new SimpleWindowForm("mywarp delete", "§5Mywarp menu", "Select the location name you want to delete");
+                $window = new SimpleWindowForm("mywarp delete", "§5Mywarp menu", $this->deletemenudescription);
                 $datas = $mywarpconfig->getAll(true);
                 foreach($datas as $data){
                     if($data !== null || $data !== undefined){
@@ -124,13 +141,13 @@ class MyWarp extends PluginBase implements Listener
             $warpname = $form->getElement("warpname")->getFinalValue();
             $mywarpconfig->set($warpname, $player->getX().",".$player->getY().",".$player->getZ().",".$player->getLevel()->getFolderName());
             $mywarpconfig->save();
-            $player->sendMessage("Added!");
+            $player->sendMessage($this->addwarppointsuccessresponse);
         }else if($form->getName() === "mywarp delete"){
             $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
             $warpname = $form->getClickedButton()->getText();
             $mywarpconfig->remove($warpname);
             $mywarpconfig->save();
-            $player->sendMessage("Deleted!");
+            $player->sendMessage($this->deletewarppointsuccessresponse);
         }else if($form->getName() === "mywarp warp"){
             $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
             $warpname = $form->getClickedButton()->getText();
@@ -138,7 +155,7 @@ class MyWarp extends PluginBase implements Listener
             $value = explode(",", $data);
             $world = Server::getInstance()->getLevelByName($value[3]);
             $player->teleport(new Position((float)$value[0], (float)$value[1], (float)$value[2], $world));
-            $player->sendMessage("Warped!");
+            $player->sendMessage($this->teleportsuccessresponse);
         }
     }
 
