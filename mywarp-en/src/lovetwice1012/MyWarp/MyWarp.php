@@ -18,10 +18,32 @@ use lovetwice1012\MyWarp\window\CustomWindowForm;
 
 class MyWarp extends PluginBase implements Listener
 {
-    
+    public $language;
+    public $menudescription;
+    public $menuwarpbutton;
+    public $menuaddbutton;
+    public $menudeletebutton;
+    public $warpmenudescription;
+    public $addmenudescription;
+    public $addtextinputbox;
+    public $deletemenudescription;
     public function onEnable()
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        $this->langage = new Config($this->getDataFolder() . "language.yml", Config::YAML);
+        if(!$this->language->exists("configsetupfinish")){
+            $this->language->set("menudescription","Please select the desired operation");
+            $this->language->set("menuwarpbutton","Warp to the warp point");
+            $this->language->set("menuaddbutton","Add a warp point");
+            $this->language->set("menudeletebutton","Delete the warp point");
+            $this->language->set("warpmenudescription","Please select the point to warp");
+            $this->language->set("addmenudescription","Please fill in the items");
+            $this->language->set("addtextinputbox","Enter the warp point name");
+            $this->language->set("deletemenudescription","Select the location name you want to delete");
+            $this->language->set("configsetupfinish",true);
+            $this->language->save();
+        }
+        
     }
 
   public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool
@@ -115,7 +137,7 @@ class MyWarp extends PluginBase implements Listener
             $data = $mywarpconfig->get($warpname);
             $value = explode(",", $data);
             $world = Server::getInstance()->getLevelByName($value[3]);
-            $player->teleport(new Position(floatval($value[0]), floatval($value[1]), floatval($value[2]), $world));
+            $player->teleport(new Position((float)$value[0], (float)$value[1], (float)$value[2], $world));
             $player->sendMessage("Warped!");
         }
     }
