@@ -29,16 +29,20 @@ class MyWarp extends PluginBase implements Listener
         switch (strtolower($command->getName())) {
                 case "mywarp":
                 case "myw":
-                if ($sender instanceof Player) {
+               if( ($command->getName() == "mywarp" && $sender->hasPermission("lovetwice1012.mywarp.mywarp"))||($command->getName() == "myw" && $sender->hasPermission("lovetwice1012.mywarp.myw"))){
+                }
+               }
+        }
+        return true;
+    }
+    public finction sendmanageform($sender){
+                        if ($sender instanceof Player) {
                     $player = $sender->getPlayer();
                     $window = new SimpleWindowForm("mywarp menu", "§5Mywarp menu", "Please select the desired operation");
                     $window->addButton("warp", "Warp to the warp point");
                     $window->addButton("add", "Add a warp point");
                     $window->addButton("delete", "Delete the warp point");            
                     $window->showTo($player);
-                }
-        }
-        return true;
     }
     public function onResponse(PlayerWindowResponse $event){
         $player = $event->getPlayer();
