@@ -47,6 +47,7 @@ class MyWarp extends PluginBase implements Listener
                     $window->addButton("add", "Add a warp point");
                     $window->addButton("delete", "Delete the warp point");            
                     $window->showTo($player);
+                    }
     }
     public function onResponse(PlayerWindowResponse $event){
         $player = $event->getPlayer();
