@@ -30,7 +30,7 @@ class MyWarp extends PluginBase implements Listener
     public function onEnable()
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
-        $this->langage = new Config($this->getDataFolder() . "language.yml", Config::YAML);
+        $this->language = new Config($this->getDataFolder() . "language.yml", Config::YAML);
         if(!$this->language->exists("configsetupfinish")){
             $this->language->set("menudescription","Please select the desired operation");
             $this->language->set("menuwarpbutton","Warp to the warp point");
