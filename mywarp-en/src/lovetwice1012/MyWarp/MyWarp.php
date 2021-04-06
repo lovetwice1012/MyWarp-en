@@ -28,15 +28,19 @@ class MyWarp extends PluginBase implements Listener
     {
         switch (strtolower($command->getName())) {
                 case "mywarp":
+                  if(($command->getName() == "mywarp" && $sender->hasPermission("lovetwice1012.mywarp.mywarp"))){
+                      $this->sendmanageform($sender);
+                  }
                 case "myw":
-               if( ($command->getName() == "mywarp" && $sender->hasPermission("lovetwice1012.mywarp.mywarp"))||($command->getName() == "myw" && $sender->hasPermission("lovetwice1012.mywarp.myw"))){
-                }
+                  if($command->getName() == "myw" && $sender->hasPermission("lovetwice1012.mywarp.myw")){
+                      $this->sendmanageform($sender);
+                  }
                }
         }
         return true;
     }
     public finction sendmanageform($sender){
-                        if ($sender instanceof Player) {
+                    if ($sender instanceof Player) {
                     $player = $sender->getPlayer();
                     $window = new SimpleWindowForm("mywarp menu", "§5Mywarp menu", "Please select the desired operation");
                     $window->addButton("warp", "Warp to the warp point");
@@ -55,6 +59,7 @@ class MyWarp extends PluginBase implements Listener
         if($form->getName() === "mywarp menu"){
             switch($form->getClickedButton()->getText()){
                 case "Warp to the warp point":
+                if($player->hasPermission("lovetwice1012.mywarp.warp")){
                 $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
                 $window = new SimpleWindowForm("mywarp warp", "§5Mywarp menu", "Please select the point to warp");
                 $datas = $mywarpconfig->getAll(true);
@@ -64,13 +69,17 @@ class MyWarp extends PluginBase implements Listener
                     }
                 }
                 $window->showTo($player);
+                }
                 break;
                 case "Add a warp point":
+                if($player->hasPermission("lovetwice1012.mywarp.add")){
                 $window = new CustomWindowForm("mywarp add", "§5Mywarp menu", "Please fill in the items");
                 $window->addInput("warpname", "Enter the warp point name");
                 $window->showTo($player);
+                }
                 break;
                 case "Delete the warp point":
+                if($player->hasPermission("lovetwice1012.mywarp.delete")){
                 $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
                 $window = new SimpleWindowForm("mywarp delete", "§5Mywarp menu", "Select the location name you want to delete");
                 $datas = $mywarpconfig->getAll(true);
@@ -80,6 +89,7 @@ class MyWarp extends PluginBase implements Listener
                     }
                 }
                 $window->showTo($player);
+                }
                 break;
                 default:
                 $player->sendMessage($form->getClickedButton()->getText());
