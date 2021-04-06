@@ -28,18 +28,18 @@ class MyWarp extends PluginBase implements Listener
     {
         switch (strtolower($command->getName())) {
                 case "mywarp":
-                  if(($command->getName() == "mywarp" && $sender->hasPermission("lovetwice1012.mywarp.mywarp"))){
+                  if($sender->hasPermission("lovetwice1012.mywarp.mywarp")){
                       $this->sendmanageform($sender);
                   }
                 case "myw":
-                  if($command->getName() == "myw" && $sender->hasPermission("lovetwice1012.mywarp.myw")){
+                  if($sender->hasPermission("lovetwice1012.mywarp.myw")){
                       $this->sendmanageform($sender);
                   }
                }
         }
         return true;
     }
-    public finction sendmanageform($sender){
+    public function sendmanageform($sender){
                     if ($sender instanceof Player) {
                     $player = $sender->getPlayer();
                     $window = new SimpleWindowForm("mywarp menu", "§5Mywarp menu", "Please select the desired operation");
