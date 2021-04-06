@@ -31,11 +31,12 @@ class MyWarp extends PluginBase implements Listener
                   if($sender->hasPermission("lovetwice1012.mywarp.mywarp")){
                       $this->sendmanageform($sender);
                   }
+                break;
                 case "myw":
                   if($sender->hasPermission("lovetwice1012.mywarp.myw")){
                       $this->sendmanageform($sender);
                   }
-               
+                break;
         }
         return true;
     }
