@@ -99,7 +99,7 @@ class MyWarp extends PluginBase implements Listener
 
         if($form->getName() === "mywarp menu"){
             switch($form->getClickedButton()->getText()){
-                case "Warp to the warp point":
+                case $this->menuwarpbutton:
                 if($player->hasPermission("lovetwice1012.mywarp.warp")){
                 $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
                 $window = new SimpleWindowForm("mywarp warp", "§5Mywarp menu", $this->warpmenudescription);
@@ -112,14 +112,14 @@ class MyWarp extends PluginBase implements Listener
                 $window->showTo($player);
                 }
                 break;
-                case "Add a warp point":
+                case $this->menuaddbutton:
                 if($player->hasPermission("lovetwice1012.mywarp.add")){
                 $window = new CustomWindowForm("mywarp add", "§5Mywarp menu", $this->addmenudescription);
                 $window->addInput("warpname", $this->addtextinputbox);
                 $window->showTo($player);
                 }
                 break;
-                case "Delete the warp point":
+                case $this->menudeletebutton:
                 if($player->hasPermission("lovetwice1012.mywarp.delete")){
                 $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
                 $window = new SimpleWindowForm("mywarp delete", "§5Mywarp menu", $this->deletemenudescription);
