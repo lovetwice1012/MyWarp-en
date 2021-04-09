@@ -105,9 +105,7 @@ class MyWarp extends PluginBase implements Listener
                 $window = new SimpleWindowForm("mywarp warp", "§5Mywarp menu", $this->warpmenudescription);
                 $datas = $mywarpconfig->getAll(true);
                 foreach($datas as $data){
-                    if($data !== null || $data !== undefined){
                         $window->addButton($data, $data);
-                    }
                 }
                 $window->showTo($player);
                 }
@@ -125,9 +123,7 @@ class MyWarp extends PluginBase implements Listener
                 $window = new SimpleWindowForm("mywarp delete", "§5Mywarp menu", $this->deletemenudescription);
                 $datas = $mywarpconfig->getAll(true);
                 foreach($datas as $data){
-                    if($data !== null || $data !== undefined){
                         $window->addButton($data, $data);
-                    }
                 }
                 $window->showTo($player);
                 }
