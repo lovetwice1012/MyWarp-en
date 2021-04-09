@@ -97,7 +97,7 @@ class MyWarp extends PluginBase implements Listener
             return;
         }
 
-        if($form->getName() === "mywarp menu"){
+        if(($form instanceof SimpleWindowForm) && $form->getName() === "mywarp menu"){
             switch($form->getClickedButton()->getText()){
                 case $this->menuwarpbutton:
                 if($player->hasPermission("lovetwice1012.mywarp.warp")){
