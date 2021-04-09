@@ -136,19 +136,19 @@ class MyWarp extends PluginBase implements Listener
                 $player->sendMessage($form->getClickedButton()->getText());
                 break;
             }
-        }else if($form->getName() === "mywarp add"){
+        }else if(($form instanceof CustomWindowForm ) && $form->getName() === "mywarp add"){
             $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
             $warpname = $form->getElement("warpname")->getFinalValue();
             $mywarpconfig->set($warpname, $player->getX().",".$player->getY().",".$player->getZ().",".$player->getLevel()->getFolderName());
             $mywarpconfig->save();
             $player->sendMessage($this->addwarppointsuccessresponse);
-        }else if($form->getName() === "mywarp delete"){
+        }else if(($form instanceof SimpleWindowForm) && $form->getName() === "mywarp delete"){
             $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
             $warpname = $form->getClickedButton()->getText();
             $mywarpconfig->remove($warpname);
             $mywarpconfig->save();
             $player->sendMessage($this->deletewarppointsuccessresponse);
-        }else if($form->getName() === "mywarp warp"){
+        }else if(($form instanceof SimpleWindowForm) && $form->getName() === "mywarp warp"){
             $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
             $warpname = $form->getClickedButton()->getText();
             $data = $mywarpconfig->get($warpname);
