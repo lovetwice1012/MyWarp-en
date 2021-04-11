@@ -16,23 +16,23 @@ permissions:
    lovetwice1012.mywarp.*:
      description: Players can manage their own warp points
      children:
-       lovetwice1012.mywarp.mywarp: true
-       lovetwice1012.mywarp.myw: true
-       lovetwice1012.mywarp.add: true
-       lovetwice1012.mywarp.delete: true
-       lovetwice1012.mywarp.warp: true
-   lovetwice1012.mywarp.mywarp:
+       mywarp.mywarp: true
+       mywarp.myw: true
+       mywarp.add: true
+       mywarp.delete: true
+       mywarp.warp: true
+   mywarp.mywarp:
      description: Players can use mywarp command to manage their own warp points
      default: true
-   lovetwice1012.mywarp.myw:
+   mywarp.myw:
      description: Players can use mywarp command to manage their own warp points
      default: true
-   lovetwice1012.mywarp.add:
+   mywarp.add:
      description: Players can add their own warp points
      default: true
-   lovetwice1012.mywarp.delete:
+   mywarp.delete:
      description: Players can delete their own warp points
      default: true
-   lovetwice1012.mywarp.warp:
+   mywarp.warp:
      description: Players can warp their own warp points
      default: true
