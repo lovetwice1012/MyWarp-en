@@ -67,12 +67,12 @@ class MyWarp extends PluginBase implements Listener
     {
         switch (strtolower($command->getName())) {
                 case "mywarp":
-                  if($sender->hasPermission("lovetwice1012.mywarp.mywarp")){
+                  if($sender->hasPermission("mywarp.mywarp")){
                       $this->sendmanageform($sender);
                   }
                 break;
                 case "myw":
-                  if($sender->hasPermission("lovetwice1012.mywarp.myw")){
+                  if($sender->hasPermission("mywarp.myw")){
                       $this->sendmanageform($sender);
                   }
                 break;
@@ -100,7 +100,7 @@ class MyWarp extends PluginBase implements Listener
         if(($form instanceof SimpleWindowForm) && $form->getName() === "mywarp menu"){
             switch($form->getClickedButton()->getText()){
                 case $this->menuwarpbutton:
-                if($player->hasPermission("lovetwice1012.mywarp.warp")){
+                if($player->hasPermission("mywarp.warp")){
                 $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
                 $window = new SimpleWindowForm("mywarp warp", "§5Mywarp menu", $this->warpmenudescription);
                 $datas = $mywarpconfig->getAll(true);
@@ -111,14 +111,14 @@ class MyWarp extends PluginBase implements Listener
                 }
                 break;
                 case $this->menuaddbutton:
-                if($player->hasPermission("lovetwice1012.mywarp.add")){
+                if($player->hasPermission("mywarp.add")){
                 $window = new CustomWindowForm("mywarp add", "§5Mywarp menu", $this->addmenudescription);
                 $window->addInput("warpname", $this->addtextinputbox);
                 $window->showTo($player);
                 }
                 break;
                 case $this->menudeletebutton:
-                if($player->hasPermission("lovetwice1012.mywarp.delete")){
+                if($player->hasPermission("mywarp.delete")){
                 $mywarpconfig = new Config($this->getDataFolder() . $player->getName().".yml", Config::YAML);
                 $window = new SimpleWindowForm("mywarp delete", "§5Mywarp menu", $this->deletemenudescription);
                 $datas = $mywarpconfig->getAll(true);
